@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+
+<!-- Google tag (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8ZNZZXFLC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X8ZNZZXFLC');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Denys | Pro</title>
+
+<style>
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0b0b0b;
+    color: white;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.glow {
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: #00ffcc;
+    color: black;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.card {
+    background: #141414;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+/* FORM */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin: auto;
+}
+
+input, textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* TELEGRAM */
+.telegram {
+    text-align: center;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <b>Denys</b>
+    <div>
+        <a href="#services" style="color:white;">Послуги</a>
+        <a href="#contact" style="color:white;">Контакти</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Я <span class="glow" id="typing"></span></h1>
+    <p>Створюю сайти та допомагаю з ПК</p>
+</section>
+
+<section id="services" class="cards">
+    <div class="card">Сайти</div>
+    <div class="card">Код</div>
+    <div class="card">ПК</div>
+</section>
+
+<section id="contact">
+    <h2 style="text-align:center;">Контакти</h2>
+
+    <form onsubmit="sendMessage(event)">
+        <input type="text" id="name" placeholder="Ім'я" required>
+        <input type="text" id="contactInput" placeholder="Telegram" required>
+        <textarea id="message" placeholder="Повідомлення" required></textarea>
+        <button class="btn">Відправити</button>
+    </form>
+
+    <div class="telegram">
+        📩 Telegram: <b>@DENCHIKBUB</b>
+    </div>
+</section>
+
+<script>
+// typing effect
+const text = ["роблю сайти", "пишу код", "допомагаю з ПК"];
+let i = 0, j = 0, isDeleting = false;
+
+function type() {
+    let current = text[i];
+
+    document.getElementById("typing").textContent =
+        isDeleting ? current.substring(0, j--) : current.substring(0, j++);
+
+    if (!isDeleting && j === current.length) {
+        isDeleting = true;
+        setTimeout(type, 1000);
+        return;
+    }
+
+    if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % text.length;
+    }
+
+    setTimeout(type, isDeleting ? 50 : 100);
+}
+type();
+
+// Telegram submit
+function sendMessage(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let contact = document.getElementById("contactInput").value;
+    let msg = document.getElementById("message").value;
+
+    let text = `Заявка:%0AІм'я: ${name}%0AКонтакт: ${contact}%0AПовідомлення: ${msg}`;
+
+    let url = `https://t.me/DENCHIKBUB?text=${encodeURIComponent(text)}`;
+
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
