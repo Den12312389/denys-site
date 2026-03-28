@@ -168,7 +168,7 @@ function sendMessage(e) {
     let contact = document.getElementById("contactInput").value;
     let msg = document.getElementById("message").value;
 
-    let text = `Заявка:%0AІм'я: ${name}%0AКонтакт: ${contact}%0AПовідомлення: ${msg}`;
+    let text = `Заявка:Ім'я: ${name}Контакт: ${contact}Повідомлення: ${msg}`;
 
     let url = `https://t.me/DENCHIKBUB?text=${encodeURIComponent(text)}`;
 
