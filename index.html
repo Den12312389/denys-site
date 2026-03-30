@@ -2,15 +2,6 @@
 <html lang="uk">
 <head>
 
-<!-- Google tag (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8ZNZZXFLC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-X8ZNZZXFLC');
-</script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,8 +12,8 @@ html { scroll-behavior: smooth; }
 
 body {
     margin: 0;
-    font-family: Arial;
-    background: #0b0b0b;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #111, #000);
     color: white;
 }
 
@@ -30,10 +21,42 @@ body {
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 20px 40px;
+    align-items: center;
+    padding: 18px 30px;
     position: fixed;
     width: 100%;
-    background: rgba(0,0,0,0.8);
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    opacity: 0.8;
+    position: relative;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: #00ffcc;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #00ffcc;
+    opacity: 1;
+}
+
+nav a:hover::after {
+    width: 100%;
 }
 
 /* HERO */
@@ -43,59 +66,150 @@ nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
 }
 
 .glow {
     color: #00ffcc;
-    text-shadow: 0 0 10px #00ffcc;
+    text-shadow: 0 0 20px #00ffcc;
 }
 
 /* BUTTON */
 .btn {
-    margin-top: 15px;
-    padding: 12px 25px;
-    background: #00ffcc;
-    color: black;
-    border-radius: 10px;
+    margin-top: 20px;
+    padding: 14px 30px;
+    background: linear-gradient(45deg, #00ffcc, #00aaff);
     border: none;
+    border-radius: 10px;
     cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+/* SECTIONS */
+section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* STATS */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    min-width: 150px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s;
+}
+
+.stat.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat h2 {
+    color: #00ffcc;
 }
 
 /* CARDS */
 .cards {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    padding: 80px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .card {
-    background: #141414;
-    padding: 25px;
-    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s;
 }
 
-/* FORM */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 300px;
-    margin: auto;
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+/* IMAGE CARD */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+/* CONTACT */
 input, textarea {
-    padding: 10px;
-    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 12px;
+    border-radius: 10px;
     border: none;
+    display: block;
 }
 
-/* TELEGRAM */
-.telegram {
-    text-align: center;
+textarea {
+    height: 100px;
+}
+
+form {
     margin-top: 20px;
 }
+
+/* FLOAT */
+.tg-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00ffcc;
+    padding: 15px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.tg-float:hover {
+    transform: scale(1.2);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 30px;
+    }
+}
 </style>
+
 </head>
 
 <body>
@@ -103,24 +217,84 @@ input, textarea {
 <nav>
     <b>Denys</b>
     <div>
-        <a href="#services" style="color:white;">Послуги</a>
-        <a href="#contact" style="color:white;">Контакти</a>
+        <a href="#about">Про мене</a>
+        <a href="#portfolio">Портфоліо</a>
+        <a href="#contact">Контакти</a>
     </div>
 </nav>
 
 <section class="hero">
     <h1>Я <span class="glow" id="typing"></span></h1>
-    <p>Створюю сайти та допомагаю з ПК</p>
+    <p>Сайти • Програмування • ПК</p>
+    <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Замовити сайт
+    </button>
 </section>
 
-<section id="services" class="cards">
-    <div class="card">Сайти</div>
-    <div class="card">Код</div>
-    <div class="card">ПК</div>
+<section id="about">
+    <h2>Про мене</h2>
+    <p>Роблю сучасні сайти, допомагаю з кодом і налаштуванням ПК.</p>
+</section>
+
+<section>
+    <div class="stats">
+        <div class="stat">
+            <h2>50+</h2>
+            <p>Проєктів</p>
+        </div>
+        <div class="stat">
+            <h2>30+</h2>
+            <p>Клієнтів</p>
+        </div>
+        <div class="stat">
+            <h2>1 день</h2>
+            <p>Швидкість</p>
+        </div>
+    </div>
+</section>
+
+<section id="portfolio">
+    <h2>Портфоліо</h2>
+
+    <div class="cards">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
+            <div class="card-content">
+                <h3>Сайт 1</h3>
+                <p>Landing page</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+            <div class="card-content">
+                <h3>Сайт 2</h3>
+                <p>Бізнес сайт</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+            <div class="card-content">
+                <h3>Сайт 3</h3>
+                <p>Ігровий сайт</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Відгуки</h2>
+
+    <div class="cards">
+        <div class="card">🔥 Дуже швидко і якісно</div>
+        <div class="card">💪 Топ робота</div>
+        <div class="card">🚀 Рекомендую</div>
+    </div>
 </section>
 
 <section id="contact">
-    <h2 style="text-align:center;">Контакти</h2>
+    <h2>Контакти</h2>
 
     <form onsubmit="sendMessage(event)">
         <input type="text" id="name" placeholder="Ім'я" required>
@@ -128,20 +302,17 @@ input, textarea {
         <textarea id="message" placeholder="Повідомлення" required></textarea>
         <button class="btn">Відправити</button>
     </form>
-
-    <div class="telegram">
-        📩 Telegram: <b>@DENCHIKBUB</b>
-    </div>
 </section>
 
+<a href="https://t.me/DENCHIKBUB" target="_blank" class="tg-float">💬</a>
+
 <script>
-// typing effect
-const text = ["роблю сайти", "пишу код", "допомагаю з ПК"];
+// typing
+const text = ["роблю сайти", "пишу код", "допомагаю"];
 let i = 0, j = 0, isDeleting = false;
 
 function type() {
     let current = text[i];
-
     document.getElementById("typing").textContent =
         isDeleting ? current.substring(0, j--) : current.substring(0, j++);
 
@@ -160,7 +331,16 @@ function type() {
 }
 type();
 
-// Telegram submit
+// animations
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('show');
+    });
+});
+
+document.querySelectorAll('.card, .stat').forEach(el => observer.observe(el));
+
+// send
 function sendMessage(e) {
     e.preventDefault();
 
@@ -168,11 +348,8 @@ function sendMessage(e) {
     let contact = document.getElementById("contactInput").value;
     let msg = document.getElementById("message").value;
 
-    let text = `Заявка:Ім'я: ${name}Контакт: ${contact}Повідомлення: ${msg}`;
-
-    let url = `https://t.me/DENCHIKBUB?text=${encodeURIComponent(text)}`;
-
-    window.open(url, "_blank");
+    let text = `Заявка:\n${name}\n${contact}\n${msg}`;
+    window.open(`https://t.me/DENCHIKBUB?text=${encodeURIComponent(text)}`, "_blank");
 }
 </script>
 
